@@ -1,0 +1,32 @@
+---
+applications:
+  - name: blue-button-mcp-server
+    buildpacks:
+      - python_buildpack
+    memory: 512M
+    disk_quota: 1G
+    instances: 1
+
+    # FastMCP HTTP server - uses PORT env var from cloud.gov
+    command: uvicorn blue_button_server:app --host 0.0.0.0 --port $PORT
+
+    # Public route for MCP clients (auth handled by the server via Blue Button OAuth)
+    routes:
+      - route: blue-button-mcp.app.cloud.gov
+
+    # Health check
+    health-check-type: http
+    health-check-http-endpoint: /health
+
+    env:
+      # Python settings
+      PYTHONUNBUFFERED: "1"
+
+      # Use sandbox by default (set to "false" for production)
+      USE_SANDBOX: "true"
+
+      # Authentication via Blue Button OAuth
+      # Set these via `cf set-env` for security:
+      #   cf set-env blue-button-mcp-server BASE_URL https://blue-button-mcp.app.cloud.gov
+      #   cf set-env blue-button-mcp-server BLUE_BUTTON_CLIENT_ID <your-client-id>
+      #   cf set-env blue-button-mcp-server BLUE_BUTTON_CLIENT_SECRET <your-client-secret>

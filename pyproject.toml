@@ -1,0 +1,46 @@
+[project]
+name = "blue-button-mcp-server"
+version = "0.1.0"
+description = "MCP server for CMS Blue Button Medicare API"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp",
+    "httpx>=0.27.0",
+    "python-dotenv",
+    "uvicorn>=0.32.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8.0",
+    "taskipy>=1.14.0"
+]
+test = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
+
+[tool.taskipy.tasks]
+dev = "uvicorn blue_button_server:app --host 0.0.0.0 --port 8000 --reload"
+serve = "uvicorn blue_button_server:app --host 0.0.0.0 --port 8000"
+lint = "ruff check ."
+format = "ruff format ."
+test = "pytest"
+build = "uv build"
+requirements = "uv export --no-hashes --no-dev -o requirements.txt"
