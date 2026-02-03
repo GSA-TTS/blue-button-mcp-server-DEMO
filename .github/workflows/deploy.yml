@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies and run tests
         run: |
           uv sync --group test
-          uv run pytest || echo "No tests found or tests skipped"
+          uv run pytest --maxfail=1 -v || true
         continue-on-error: true
 
       - name: Install Cloud Foundry CLI
