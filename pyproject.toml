@@ -37,8 +37,8 @@ select = ["E", "F", "I", "W"]
 ignore = ["E501"]
 
 [tool.taskipy.tasks]
-dev = "uvicorn server:app --host 0.0.0.0 --port 8000 --reload"
-serve = "uvicorn server:app --host 0.0.0.0 --port 8000"
+dev = "uvicorn src.blue_button.server:app --host 0.0.0.0 --port 8000 --reload"
+serve = "uvicorn src.blue_button.server:app --host 0.0.0.0 --port 8000"
 lint = "ruff check ."
 format = "ruff format ."
 test = "pytest"
