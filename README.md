@@ -80,6 +80,9 @@ See `manifest.yml` for deployment configuration.
 | Tool | Description |
 |------|-------------|
 | `get_patient_info` | Get patient demographics (name, address, DOB) - requires `patient/Patient.rs` scope |
+| `get_coverage_info` | Get Medicare and supplemental coverage information - requires `patient/Coverage.rs` scope |
+| `get_explanation_of_benefit` | Get Medicare claim information (EOB records) - requires `patient/ExplanationOfBenefit.rs` scope |
+| `search_claims` | Search claims by date range and type - filters by service date and claim type |
 
 ## Authentication
 
