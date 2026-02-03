@@ -52,7 +52,7 @@ USE_SANDBOX=true
 
 ```bash
 # Using uvicorn directly
-uvicorn blue_button_server:app --host 0.0.0.0 --port 8000 --reload
+uvicorn server:app --host 0.0.0.0 --port 8000 --reload
 
 # Or with taskipy
 task dev

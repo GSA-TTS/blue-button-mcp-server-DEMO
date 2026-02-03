@@ -8,7 +8,7 @@ applications:
     instances: 1
 
     # FastMCP HTTP server - uses PORT env var from cloud.gov
-    command: uvicorn blue_button_server:app --host 0.0.0.0 --port $PORT
+    command: uvicorn server:app --host 0.0.0.0 --port $PORT
 
     # Public route for MCP clients (auth handled by the server via Blue Button OAuth)
     routes:
