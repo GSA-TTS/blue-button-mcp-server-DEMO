@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -49,8 +50,8 @@ jobs:
           CF_SPACE: ${{ secrets.CF_SPACE }}
         run: |
           cf api $CF_API
-          cf auth $CF_USERNAME $CF_PASSWORD
-          cf target -o $CF_ORG -s $CF_SPACE
+          cf auth "$CF_USERNAME" "$CF_PASSWORD"
+          cf target -o "$CF_ORG" -s "$CF_SPACE"
 
       - name: Deploy to Cloud Foundry
         run: |
