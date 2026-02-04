@@ -35,12 +35,14 @@ def create_server() -> FastMCP:
         api_base=API_BASE,
     )
 
-    return FastMCP(name="Blue Button Medicare Data", auth=auth)
+    mcp = FastMCP(name="Blue Button Medicare Data", auth=auth)
+
+    register_tools(mcp)
+
+    return mcp
 
 
 mcp = create_server()
-
-register_tools(mcp)
 
 
 @mcp.custom_route("/health", methods=["GET"])
