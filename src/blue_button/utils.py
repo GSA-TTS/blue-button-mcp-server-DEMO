@@ -7,7 +7,7 @@ from fastmcp.server.dependencies import get_access_token
 from src.blue_button.config import API_BASE
 
 # Set up logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
