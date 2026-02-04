@@ -14,6 +14,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from src.blue_button.auth import create_oauth_provider
+from src.blue_button.tools import register_tools
 
 load_dotenv()
 
@@ -43,6 +44,8 @@ def create_server() -> FastMCP:
 
 
 mcp = create_server()
+
+register_tools(mcp)
 
 
 @mcp.custom_route("/health", methods=["GET"])
