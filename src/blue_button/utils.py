@@ -2,7 +2,7 @@ import httpx
 from fastmcp.server.auth import AccessToken
 from fastmcp.server.dependencies import get_access_token
 
-from src.blue_button.server import API_BASE
+from src.blue_button.config import API_BASE
 
 
 async def call_api(token: str, endpoint: str) -> dict:

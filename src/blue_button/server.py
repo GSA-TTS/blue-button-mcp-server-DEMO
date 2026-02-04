@@ -8,18 +8,13 @@ FHIR-formatted patient, coverage, and claims data.
 
 import os
 
-from dotenv import load_dotenv
 from fastmcp import FastMCP
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from src.blue_button.auth import create_oauth_provider
+from src.blue_button.config import API_BASE
 from src.blue_button.tools import register_tools
-
-load_dotenv()
-
-# Blue Button API base URL - defaults to sandbox for development
-API_BASE = os.environ.get("BLUE_BUTTON_API_BASE", "https://sandbox.bluebutton.cms.gov/v2")
 
 
 def create_server() -> FastMCP:
