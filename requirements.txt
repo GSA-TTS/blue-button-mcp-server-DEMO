@@ -205,7 +205,7 @@ referencing==0.36.2
     #   jsonschema
     #   jsonschema-path
     #   jsonschema-specifications
-requests==2.32.5
+requests==2.33.0
     # via jsonschema-path
 rich==14.3.2
     # via
