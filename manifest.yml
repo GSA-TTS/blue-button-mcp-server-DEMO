@@ -7,8 +7,10 @@ applications:
     disk_quota: 1G
     instances: 1
 
-    # FastMCP HTTP server - uses PORT env var from cloud.gov
-    command: PYTHONPATH=src uvicorn src.blue_button.server:app --host 0.0.0.0 --port $PORT
+    # FastMCP HTTP server - uses PORT env var from cloud.gov.
+    # FastMCP serves its own ASGI app; there is no module-level `app`, so we
+    # run the server module directly (its __main__ starts HTTP when PORT is set).
+    command: PYTHONPATH=src python -m src.blue_button.server
 
     # Public route for MCP clients (auth handled by the server via Blue Button OAuth)
     routes:
