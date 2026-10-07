@@ -42,20 +42,18 @@ class BlueButtonTokenVerifier(TokenVerifier):
                 )
                 response.raise_for_status()
                 claims = response.json()
-            logger.info("userinfo claims received: keys=%s", list(claims.keys()))
+            logger.info("userinfo claims received")
         except httpx.HTTPStatusError as e:
             # Non-fatal: enrollee may have blocked demographics, or userinfo
             # may be unavailable. Fall back to token-response claims.
             logger.warning(
-                "userinfo returned %s (continuing with token-response claims): %s",
+                "userinfo returned %s; continuing with token-response claims",
                 e.response.status_code,
-                e.response.text,
             )
         except Exception as e:
             logger.warning(
-                "userinfo request failed (%s: %s); continuing with token-response claims",
+                "userinfo request failed (%s); continuing with token-response claims",
                 type(e).__name__,
-                e,
             )
 
         # Prefer an explicit patient claim (from userinfo) but the proxy will
@@ -155,10 +153,9 @@ class BlueButtonOAuthProxy(OAuthProxy):
             access_token.claims = merged
         except Exception as e:
             logger.warning(
-                "Could not merge token-response claims (%s: %s); "
+                "Could not merge token-response claims (%s); "
                 "proceeding with verifier claims only",
                 type(e).__name__,
-                e,
             )
 
         return access_token
